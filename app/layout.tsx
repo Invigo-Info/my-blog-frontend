@@ -6,9 +6,19 @@ import Footer from '@/components/Footer'
 
 const inter = Inter({subsets: ['latin']})
 
+const indexable = process.env.NEXT_PUBLIC_INDEX === 'true'
+
 export const metadata: Metadata = {
   title: 'My Blog',
   description: 'A blog built with Next.js and Sanity',
+  robots: indexable
+    ? {index: true, follow: true}
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {index: false, follow: false, noimageindex: true},
+      },
 }
 
 export default function RootLayout({
